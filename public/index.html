@@ -3,7 +3,7 @@
     <body style="margin:0; background:black">
         <div style="position: fixed; height: 100%; width: 100%;"></div>
         <div style="display:flex; height: 100%; justify-content: center;">
-            <iframe style="aspect-ratio: 4 / 3; border:0;" src="https://ws4k.beedle.online/?hazards-checkbox=false&current-weather-checkbox=true&latest-observations-checkbox=false&hourly-checkbox=true&hourly-graph-checkbox=true&travel-checkbox=true&regional-forecast-checkbox=false&local-forecast-checkbox=false&extended-forecast-checkbox=true&almanac-checkbox=true&radar-checkbox=true&marine-forecast-checkbox=false&aqi-forecast-checkbox=true&settings-experimentalFeatures-checkbox=false&settings-hideWebamp-checkbox=true&settings-kiosk-checkbox=false&settings-scanLines-checkbox=false&settings-wide-checkbox=false&chkAutoRefresh=true&settings-windUnits-select=2.00&settings-marineWindUnits-select=1.00&settings-marineWaveHeightUnits-select=1.00&settings-temperatureUnits-select=1.00&settings-distanceUnits-select=1.00&settings-pressureUnits-select=1.00&settings-hoursFormat-select=2.00&settings-speed-select=1.00&latLonQuery=Regina%2C+SK%2C+CAN&latLon=%7B%22lat%22%3A50.4481%2C%22lon%22%3A-104.6158%7D&kiosk=true"></iframe>
+            <iframe style="aspect-ratio: 4 / 3; border:0;" src="http://ws4k.beedle.online/?hazards-checkbox=false&current-weather-checkbox=true&latest-observations-checkbox=false&hourly-checkbox=true&hourly-graph-checkbox=true&travel-checkbox=true&regional-forecast-checkbox=false&local-forecast-checkbox=false&extended-forecast-checkbox=true&almanac-checkbox=true&radar-checkbox=true&marine-forecast-checkbox=false&aqi-forecast-checkbox=true&settings-experimentalFeatures-checkbox=false&settings-hideWebamp-checkbox=true&settings-kiosk-checkbox=false&settings-scanLines-checkbox=false&settings-wide-checkbox=false&chkAutoRefresh=true&settings-windUnits-select=2.00&settings-marineWindUnits-select=1.00&settings-marineWaveHeightUnits-select=1.00&settings-temperatureUnits-select=1.00&settings-distanceUnits-select=1.00&settings-pressureUnits-select=1.00&settings-hoursFormat-select=2.00&settings-speed-select=1.00&latLonQuery=Regina%2C+SK%2C+CAN&latLon=%7B%22lat%22%3A50.4481%2C%22lon%22%3A-104.6158%7D&kiosk=true"></iframe>
         </div>
     </body>
     <audio id="player"></audio>
@@ -15,10 +15,12 @@
     let index = 0;
 
     // Fetch the playlist from the server
-    fetch("/playlist").then(res => res.json()).then(files =>
-    {
-        playlist = files.map(f => "/music/" + f);
-    });
+    fetch("/playlist")
+  .then(res => res.json())
+  .then(files => {
+    files.sort(() => Math.random() - 0.5); // randomize order
+    playlist = files.map(f => "/music/" + f);
+  });
 
     document.addEventListener("click", stopStartPlayer);
 
